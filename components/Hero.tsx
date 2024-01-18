@@ -11,13 +11,16 @@ export default function Hero() {
   const [newCode, setNewCode] = useState("");
   const { toast } = useToast();
   const checkCode = async () => {
-    const res = await fetch("http://127.0.0.1:8000/code/uses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ code: newCode }),
-    });
+    const res = await fetch(
+      "https://code-generator-eight.vercel.app/code/uses",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ code: newCode }),
+      }
+    );
     const response = await res.json();
     if (response.error) {
       toast({
@@ -30,7 +33,7 @@ export default function Hero() {
       });
   };
   const generateCode = async () => {
-    const res = await fetch("http://127.0.0.1:8000/code");
+    const res = await fetch("https://code-generator-eight.vercel.app/code");
     const data = await res.json();
     if (res.status === 201) {
       toast({
